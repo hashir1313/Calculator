@@ -1,6 +1,10 @@
 import tkinter as tk
-
+from tkinter import *
 calculation = ""
+
+root = tk.Tk()
+root.title("Calculator")
+root.resizable(False, False)
 
 def add_to_calculation(symbol):
     global calculation
@@ -23,9 +27,16 @@ def clear_field():
     calculation = ""
     text_result.delete(1.0, "end")
 
-root = tk.Tk()
-root.title("Calculator")
-root.resizable(False, False)
+def delete():
+    global calculation
+    calculation = calculation[:-1]
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0, calculation)
+
+icon = PhotoImage(file="calculator.png")
+root.iconphoto(False, icon)
+
+
 
 frame = tk.Frame(root)
 
@@ -53,7 +64,7 @@ btn_9.grid(row=4, column=2, columnspan=1, stick="we")
 btn_0 = tk.Button(root, text="0", font=("Arial", 14), command=lambda: add_to_calculation("0"), width=5)
 btn_0.grid(row=5, column=1, columnspan=1, stick="we")
 btn_point = tk.Button(root, text=".", font=("Arial", 14), command=lambda: add_to_calculation("."), width=5)
-btn_point.grid(row=6, column=2, columnspan=1, stick="we")
+btn_point.grid(row=6, column=1, columnspan=1, stick="we")
 btn_left_bracket = tk.Button(root, text="(", font=("Arial", 14), command=lambda: add_to_calculation("("), width=5)
 btn_left_bracket.grid(row=5, column=0, columnspan=1, stick="we")
 btn_right_bracket = tk.Button(root, text=")", font=("Arial", 14), command=lambda: add_to_calculation(")"), width=5)
@@ -64,12 +75,15 @@ btn_plus = tk.Button(root, text="+", font=("Arial", 14), command=lambda: add_to_
 btn_plus.grid(row=3, column=3, columnspan=1, stick="we")
 btn_minus = tk.Button(root, text="-", font=("Arial", 14), command=lambda: add_to_calculation("-"), width=5)
 btn_minus.grid(row=4, column=3, columnspan=1, stick="we")
-btn_multiply = tk.Button(root, text="*", font=("Arial", 14), command=lambda: add_to_calculation("*"), width=5)
+btn_multiply = tk.Button(root, text="×", font=("Arial", 14), command=lambda: add_to_calculation("*"), width=5)
 btn_multiply.grid(row=5, column=3, columnspan=1, stick="we")
-btn_divide = tk.Button(root, text="/", font=("Arial", 14), command=lambda: add_to_calculation("/"), width=5)
+btn_divide = tk.Button(root, text="÷", font=("Arial", 14), command=lambda: add_to_calculation("/"), width=5)
 btn_divide.grid(row=6, column=3, columnspan=1, stick="we")
 btn_clear = tk.Button(root, text="Clear", font=("Arial", 14), command=lambda: clear_field(), width=5)
-btn_clear.grid(row=6, column=0, columnspan=2, stick="we")
+btn_clear.grid(row=6, column=0, columnspan=1, stick="we")
+btn_delete = tk.Button(root, text="Del", font=("Arial", 14), command=lambda: delete(), width=5)
+btn_delete.grid(row=6, column=2, columnspan=1, stick="we")
+
 
 root.mainloop()
 
